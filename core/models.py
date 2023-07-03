@@ -53,38 +53,11 @@ class Trabajador(models.Model):
     def str(self):
         return self.nombre    
 
-#MILKO
-class Compra(models.Model):
-    SEGUIMIENTO = (
-        ('Validacion', 'Validacion'),
-        ('Preparacion','Preparacion'),
-        ('Reparto', 'Reparto'),
-        ('Entregado', 'Entregado'),
-    )
-
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now_add=True)
-    total = models.PositiveIntegerField()
-    estado = models.CharField(max_length=20, choices=SEGUIMIENTO, default='Validacion')
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
-
-class ProductoCarrito(models.Model):
-    compra = models.ForeignKey(Compra, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, null=True, blank=True)
-    cantidad = models.PositiveIntegerField(default=1)
-    subtotal = models.PositiveBigIntegerField()
-    
-
-
 class suscribirse(models.Model):
     name = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     monto = models.PositiveIntegerField()
-
-    
 
     def __str__(self):
         return self.email

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from usuario.models import *
 
 # Register your models here.
 
@@ -26,12 +27,4 @@ admin.site.register(Trabajador, TrabajadorAdmin)
 admin.site.register(Carrito)
 admin.site.register(ItemCarrito)
 admin.site.register(suscribirse)
-
-#MILKO
-class CompraAdmin(admin.ModelAdmin):
-    list_display = ['usuario']
-admin.site.register(Compra, CompraAdmin)
-
-class ProductoCarritoAdmin(admin.ModelAdmin):
-    list_display = ['compra']
-admin.site.register(ProductoCarrito, ProductoCarritoAdmin)
+admin.site.register(usuariopersonalizado)
