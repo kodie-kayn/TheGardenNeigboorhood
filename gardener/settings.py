@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'crispy_forms', 
     'rest_framework',
-    'paypalcheckoutsdk' ,
+    'paypalcheckoutsdk',
+    'usuario',
 
 ]
 
@@ -84,13 +85,15 @@ WSGI_APPLICATION = 'gardener.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'tgn',
+        'NAME' : 'tgn_oficial',
         'HOST' : 'localhost',
         'PORT' : '3306',
         'USER' : 'root',
         'PASSWORD' : '',
     }
 }
+
+AUTH_USER_MODEL = 'usuario.usuariopersonalizado'
 
 
 # Password validation

@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from usuario.models import *
 
 # Creamos un template de un formulario en base al modelo
 class ProductoForm(ModelForm):
@@ -40,4 +41,4 @@ class SegundoCrudForm(ModelForm):
 class SubscripcionForm(forms.ModelForm):
     class Meta:
         model = suscribirse
-        fields = ['name','apellido','email',  'monto']
+        fields = ['name','apellido','email']

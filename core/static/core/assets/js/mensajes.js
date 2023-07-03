@@ -15,6 +15,23 @@ function eliminarProducto(id) {
     })
   }
 
+  function eliminarSuscripcion() {
+    Swal.fire({
+      title: 'Desea desuscribirse',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Desuscrito','Operacion realizada con exito!','success').then(function() {
+            window.location.href = "/desactivarsuscriptor/";
+        })
+      }
+    })
+  }
+
 function mensaje(titulo,texto,icono) {
 Swal.fire({
     title: titulo,

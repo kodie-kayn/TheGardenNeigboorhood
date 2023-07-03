@@ -18,8 +18,7 @@ urlpatterns = [
     path('', index, name="index"),    
     path('detalle.html', detalle, name="detalle"), 
     path('historialcompras.html', historialcompras, name="historialcompras"),
-    path('modificarestado.html', modificarestado, name="modificarestado"),
-    path('comprasusuarios.html', comprasusuarios, name="comprasusuarios"),      
+    path('modificarestado.html', modificarestado, name="modificarestado"),      
     path('about.html/', about, name="about"),   
     path('cart.html/', cart, name="cart"),
     path('checkout.html/', checkout, name="checkout"),
@@ -48,5 +47,8 @@ urlpatterns = [
     path('update_trabajador/<id>/', update_trabajador, name="update_trabajador"),
     path('delete_trabajador/<id>/', delete_trabajador, name="delete_trabajador"),
 
+    #Suscripcion
+    path('activarsuscriptor/', activarsuscriptor, name='activarsuscriptor'),
+    path('desactivarsuscriptor/', desactivarsuscriptor, name='desactivarsuscriptor'),
 ]
 
