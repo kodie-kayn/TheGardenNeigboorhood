@@ -1,0 +1,165 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+	<!-- hero area -->
+	<div class="hero-area hero-bg" >
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1>The Garden Neighborhood</h1>
+							<div class="hero-btns">
+								<a href="shop.html" class="boxed-btn">Tienda</a>
+								<a href="contact.html" class="bordered-btn">Contáctanos</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end hero area -->
+
+	<!-- features list section -->
+	<div class="list-section pt-80 pb-80">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-shipping-fast"></i>
+						</div>
+						<div class="content">
+							<h3> Envio rápido</h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-phone-volume"></i>
+						</div>
+						<div class="content">
+							<h3>Soporte 24/7 </h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="list-box d-flex justify-content-start align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-check"></i>
+						</div>
+						<div class="content">
+							<h3>Satisfacción Garantizada</h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- end features list section -->
+
+	
+	<!-- cart banner section -->
+	<section class="cart-banner pt-100 pb-100">
+    	<div class="container">
+        	<div class="row clearfix">
+            	<!--Image Column-->
+            	<div class="image-column col-lg-6">
+                	<div class="image">
+                    
+                    	<img src="{% static 'core/assets/img/vecinos.png' %}" alt="">
+                    </div>
+                </div>
+                <!--Content Column-->
+                <div class="content-column col-lg-6">
+					<h3><span class="orange-text">Trabajando</span> unidos</h3>
+                    
+                    <div class="text">Somos vecinos unidos por una misma causa, hacer fondos a beneficio, además vendemos flores/plantas con los cuales puedes desde hermosear y complementar tu jardín hasta rediseñar tu hogar.</div>
+                    <!--Countdown Timer-->
+					<h6>Finalización de primera recaudación en...</h6>
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2023/12/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Dias</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Horas</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Min</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Seg</div></div></div></div>
+                	
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end cart banner section -->
+
+	<!-- testimonail-section -->
+	<div class="testimonail-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1 text-center">
+					<div class="testimonial-sliders">
+						<div class="single-testimonial-slider">
+							<div class="client-avater">
+								<img src="{% static 'core/assets/img/avaters/avatar1.png' %}" alt="">
+							</div>
+							<div class="client-meta">
+								<h3>Saira Hakim <span>Decoradora de Hogares</span></h3>
+								<p class="testimonial-body">
+									 "Hola, usuarios de The Garden Neighborhood  te recomiendo que hagas una compra de plantas para tu hogar o jardín. Las plantas no solo son hermosas para decorar, sino que también aportan muchos beneficios como purificar el aire y mejorar tu estado de ánimo. Además, hay una gran variedad de plantas para elegir, desde las que requieren pocos cuidados hasta las más exigentes. Mi consejo es que en función del espacio y la cantidad de luz natural que tengas en casa, selecciones las plantas que mejor se adapten. ¡Anímate a hacer una compra de plantas y darle un toque de naturaleza a tu hogar!"
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+						<div class="single-testimonial-slider">
+							<div class="client-avater">
+								<img src="{% static 'core/assets/img/avaters/avatar2.png' %}" alt="">
+							</div>
+							<div class="client-meta">
+								<h3>David Niph <span>Comprador</span></h3>
+								<p class="testimonial-body">
+									"Si estás buscando comprar plantas de alta calidad en un lugar con una gran variedad de opciones y un excelente servicio al cliente, definitivamente te recomiendo visitar The Garden Neighborhood. Allí encontrarás una gran variedad de plantas hermosas y saludables para embellecer tu hogar o jardín. El personal de la tienda es muy amable y siempre están disponibles para ofrecerte asesoramiento y recomendaciones para que encuentres las plantas adecuadas para tus necesidades. Además, la tienda cuenta con una amplia selección de suministros de jardinería y productos para el cuidado de las plantas, por lo que podrás encontrar todo lo que necesitas en un solo lugar. ¡No te arrepentirás de visitar The Garden Neighborhood! "
+								</p>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+						<div class="single-testimonial-slider">
+							<div class="client-avater">
+								<img src="{% static 'core/assets/img/avaters/avatar3.png' %}" alt="">
+							</div>
+							<div class="client-meta">
+								<h3>Jacob Sikim <span>Comprador</span></h3>
+								<p class="testimonial-body">
+									" Hola, si te gusta cuidar plantas y quieres encontrar una amplia variedad de flores y macetas de calidad, te recomiendo que vayas a The Garden Neighborhood. En esta tienda podrás encontrar desde plantas de interior hasta plantas de exterior y, además, cuentan con un amplio surtido de macetas para que puedas elegir la que mejor se adapte a tus necesidades.
+
+									En The Garden Neighborhood también encontrarás personal especializado que te ayudará a escoger las plantas que mejor se adapten a tu hogar u oficina, según la luz, temperatura y humedad de cada espacio. No lo dudes más, si eres un amante de las plantas, The Garden Neighborhood es el lugar ideal para conseguir todo lo necesario para cuidar y mantener tus plantas en perfecto estado. "
+								</p>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end testimonail-section -->
+	
+	<!-- end advertisement section -->
+	
+	<!-- shop banner -->
+	<section class="shop-banner">
+    	<div class="container">
+        	<h3>Junio llegó! <br> y con un buen <span class="orange-text">Descuento...</span></h3>
+            <div class="sale-percent"><span><br> </span>10% <span> Solo suscribiéndote!</span></div>
+            <a href="{% url 'suscribirse' %}" class="cart-btn btn-lg">Suscribete</a>
+			
+        </div>
+    </section>
+	<!-- end shop banner -->
+
+{% endblock %}

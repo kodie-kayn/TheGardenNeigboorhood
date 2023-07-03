@@ -1,0 +1,157 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Conoce un poco mas acerca de nosotros</p>
+						<h1>Sobre Nosotros</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- featured section -->
+	<div class="feature-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="featured-text">
+						<h3 class="pb-3">Porque elegir <span class="orange-text">The Garden Neighborhood ?</span></h3>
+						<br>
+						<br>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 mb-4 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-shipping-fast"></i>
+									</div>
+									<div class="content">
+										<h3>Delivery Seguro</h3>
+										<p>Rápido y garantizado.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-money-bill-alt"></i>
+									</div>
+									<div class="content">
+										<h3>Mejores precios</h3>
+										<p>Los mejores precios de macetas, tierras, platas y flores.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-check"></i>
+									</div>
+									<div class="content">
+										<h3>Satisfacción Garantizada</h3>
+										<p>Lo que desee comprar sera totalmente de su agrado.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-phone-volume"></i>
+									</div>
+									<div class="content">
+										<h3>Soporte 24/7 </h3>
+										
+										<p>supporttg@garden.com</p>
+										<p>+56 9 2523 3033</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end featured section -->
+
+	<!-- shop banner -->
+	<section class="shop-banner">
+    	<div class="container">
+
+			<h2>	<span class="orange-text">NOSOTROS</span></h2>
+			<br>
+
+        	<h5>Somos vecinos unidos por una misma causa, hacer fondos a beneficio,
+				vendemos flores/plantas con los cuales puedes 
+				desde hermosear y complementar tu jardin hasta rediseñar tu hogar, contamos con mas de 1.000 hogares y espacios rediseñados por nuestros productos.
+				 Además tenemos los mejores precios y productos cultivados por nosotros mismos.
+				 </h5>
+			<br>
+			<h5><span class="orange-text">Tenemos una extensa variedad de 
+				flores y plantas, también contamos por diferentes tipos de tierras y maceteros.
+			    </span> </h5>
+				<br>
+
+			<h5>Nuestra amplia gama de productos se adapta también a decoración de hoteles, restaurantes, inmobiliarias y comercios, extendiendo las posibilidades en decoración de hogares y jardines a infinitas posibilidades. Las plantas y las flores son un elemento de decoración que no pasa de moda. Mantener los ambientes verdes y frescos es un imprescindible para cualquier época del año.
+					 </h5>
+	
+        </div>
+    </section>
+
+	<!-- team section -->
+	<div class="mt-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title">
+						<h3>Nuestro <span class="orange-text">Equipo</span></h3>
+						<p>Destacamos su increible liderazgo en el area del jardin y huerto del barrio.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center">
+					<a href="{% url 'add_trabajador' %}" class="cart-btn"><i class="fas fa-plus"></i> Añadir Empleados</a>
+				</div>
+			</div>
+
+			<br>
+			<div class="row">				
+				<div class="col-lg-4 col-md-6">
+					{% for trab in listado %}
+					<div class="single-team-item">
+						<button></button>
+						{% if trab.imagen_trabajador %}
+						<a href="single-product.html"><img src="{{ trab.imagen_trabajador.url }}" alt="" width="300" height="300"></a>
+						{% else %}
+						<a href="single-product.html"><img src="{% static 'core/assets/img/signo_exclamacion.png' %}" alt=""></a>
+						{% endif %}
+						<h4> {{ trab.nombre_trabajador }} <span>{{ trab.descripcion_trabajador }}</span></h4>
+						<div class="text-center">
+							<a href="{% url 'delete_trabajador' trab.id %}" class="cart-btn"><i class="fas fa-trash"></i></a>
+							<a href="{% url 'update_trabajador' trab.id %}" class="cart-btn"><i class="fas fa-pen"></i></a>						
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- end team section -->
+
+	<!-- end shop banner -->
+	
+
+
+{% endblock %}

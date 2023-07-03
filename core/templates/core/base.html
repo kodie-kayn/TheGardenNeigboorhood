@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>The Garden Neighborhood</title>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="{% static 'core/assets/img/h.png' %}">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/all.min.css' %}">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="{% static 'core/assets/bootstrap/css/bootstrap.min.css' %}">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/owl.carousel.css' %}">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/magnific-popup.css' %}">
+	<!-- animate css -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/animate.css' %}">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/meanmenu.min.css' %}">
+	<!-- main style -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/main.css' %}">
+	<!-- responsive -->
+	<link rel="stylesheet" href="{% static 'core/assets/css/responsive.css' %}">
+
+</head>
+<body>
+	
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="{% url 'index' %}">
+								<img src="{% static 'core/assets/img/h.png' %}" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li class="current-list-item"><a href="#"></a>
+
+									<li><a href="{% url 'index' %}">Inicio</a></li>
+
+								</li>
+								<li><a href="{% url 'about' %}">Sobre Nosotros</a></li>								
+									<ul class="sub-menu">
+										<li><a href="{% url 'news' %}">News</a></li>
+										<li><a href="{% url 'singlenews' %}">Single News</a></li>
+									</ul>
+								</li>
+								<li><a href="{% url 'suscribirse' %}">Suscribete</a></li>								
+								{% if user.is_authenticated %}
+								<li><a href="{% url 'shop' %}">Tienda</a>
+								<li><a >Bienvenido: {{user.username}} </li>
+								<li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+								
+								{% else %}
+								
+								<li><a href="{% url 'register' %}">Registrarse</a></li>
+								<li><a href="{% url 'login' %}">Ingresar</a></li>
+								{% endif %}
+
+								{% if user.is_authenticated %}
+									<ul class="sub-menu">
+										<li><a href="{% url 'shop' %}">Shop</a></li>
+										<li><a href="{% url 'checkout' %}">Check Out</a></li>
+										<li><a href="single-product.html">Single Product</a></li>
+										<li><a href="{% url 'cart' %}">Cart</a></li>
+									</ul>
+								</li>
+								{% endif %}
+								<li><a href="{% url 'suscribirse' %}">Suscribete</a></li>
+								
+								<li>
+									
+									<div class="header-icons">
+										{% if user.is_authenticated %}
+										<a class="shopping-cart" href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
+										{% endif %}
+									</div>
+									
+								</li>
+								
+							</ul>
+						</nav>
+
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+	
+
+
+{% block contenido %}
+
+{% endblock %}
+
+<!-- footer -->
+<div class="footer-area" style="margin-top:100px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box about-widget">
+                    <h2 class="widget-title">Sobre Nosotros</h2>
+                    <p>Somos vecinos unidos por una misma causa, hacer fondos a beneficio, además vendemos flores/plantas con los cuales puedes desde hermosear y complementar tu jardín hasta rediseñar tu hogar</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box get-in-touch">
+                    <h2 class="widget-title">Contáctanos</h2>
+                    <ul>
+                        <li>Puente Alto, Santiago, Chile.</li>
+                        <li>supporttg@garden.com</li>
+                        <li>+56 9 2523 3033</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-box subscribe">
+                    <h2 class="widget-title">Subscribete</h2>
+                    <p>Subscribete para apoyar a la fundación y para que tengas un descuento fenomenal en tus futuras compras!</p>   
+                    </form>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end footer -->
+
+<!-- copyright -->
+
+<!-- end copyright -->
+
+<!-- jquery -->
+<script src="{% static 'core/assets/js/jquery-1.11.3.min.js' %}"></script>
+<!-- bootstrap -->
+<script src="{% static 'core/assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- count down -->
+<script src="{% static 'core/assets/js/jquery.countdown.js' %}"></script>
+<!-- isotope -->
+<script src="{% static 'core/assets/js/jquery.isotope-3.0.6.min.js' %}"></script>
+<!-- waypoints -->
+<script src="{% static 'core/assets/js/waypoints.js' %}"></script>
+<!-- owl carousel -->
+<script src="{% static 'core/assets/js/owl.carousel.min.js' %}"></script>
+<!-- magnific popup -->
+<script src="{% static 'core/assets/js/jquery.magnific-popup.min.js' %}"></script>
+<!-- mean menu -->
+<script src="{% static 'core/assets/js/jquery.meanmenu.min.js' %}"></script>
+<!-- sticker js -->
+<script src="{% static 'core/assets/js/sticker.js' %}"></script>
+<!-- main js -->
+<script src="{% static 'core/assets/js/main.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11%22%3E"></script>
+{% block js %}
+
+{% endblock %}

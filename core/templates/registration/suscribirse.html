@@ -1,0 +1,113 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+  <div class="container">
+    <div class="row">
+        <div class="col-12 m-5">
+
+            <h1 class="d-flex justify-content-around align-items-center align-self-center font-weight-bold text-dark"> Suscripción </h1>
+            <form method="POST">
+                
+                {% csrf_token %}
+                {{ form|crispy }}
+                
+                <div class="row justify-content-center">
+					<div class="col-md-6 text-center">
+                        <p><div id="btnPaypal"></div></p>
+					</div>
+				</div>
+              </form>
+        </div>
+    </div>
+ </div>
+
+{% endblock %}
+
+
+	<!-- end logo carousel -->
+
+	{% block js %}
+	<script src="{% static 'core/assets/js/mensajes.js' %}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script>
+		paypal.Button.render({
+			env: 'sandbox',
+			client:{
+				sandbox: 'AVRMbA897KeVT0wQtaNfsAdsPMwn7wJJylTybH8BEunSqfgIo72tTOshjJzTnrewDrBlvlIdUdkcXQ_V',
+				production: 'demo_production_:client_id'
+			},
+			locale: 'es_CL',
+			style: {
+				size: 'large',
+				color: 'black',
+				shape: 'rect'
+			},
+			commit: true,
+			payment: function (data, actions){
+				return actions.payment.create({
+					transactions: [{
+						amount: {
+							total: '3' ,
+							currency: 'USD'
+						}
+					}]
+				});
+			},
+			onAuthorize : function (data, actions) {
+				return actions.payment.execute().then(function(){
+					Swal.fire({
+						title: 'Confirmación de Pago',
+						text: 'Pago exitoso!',
+						icon: 'success',
+						showCancelButton: false,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Confirmar'
+					  }) .then((result) => {
+						if (result.isConfirmed) {
+						  Swal.fire('Pagado!', 'Pago realizado correctamente', 'success').then(function () {
+							window.location.href = "ProductoCarrito";
+						  })
+						}
+					  }) 
+				});
+			},
+			onCancel(data) {
+				Swal.fire({
+					title: 'El pago fue cancelado!',
+					text: 'Pago fallido!',
+					icon: 'error',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Confirmar'
+				  })
+			},
+			onError(err) {
+				Swal.fire({
+					title: 'Error en el pago!',
+					text: 'Error en el pago!',
+					icon: 'error',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Confrimar'
+				  })
+			},
+
+		}, '#btnPaypal');
+	</script>
+{% endblock %}

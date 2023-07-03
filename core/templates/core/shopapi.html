@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						
+						<p>Los mejores precios</p>
+						<h1>Tienda</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			
+			{% if user.is_authenticated and user.is_superuser %}
+				<div class="row justify-content-center">
+					<div class="col-md-6 text-center">
+						<h3> dolar{{ moneda.dolar.valor }}</h3>
+						<a href="{% url 'add' %}" class="cart-btn"><i class="fas fa-plus"></i> Añadir Productos</a>
+					</div>
+				</div>
+			{% endif %}
+		
+			
+			
+			<div class="row product-lists">
+				{% for aux in listado %}
+				<div class="col-lg-4 col-md-6 text-center strawberry" style="margin-top:100px">
+					<div class="single-product-item">
+						<div class="product-image">
+							{% if aux.imagen %}
+							<a href="single-product.html"><img src="{{ aux.imagen }}" alt="" width="300" height="300"></a>
+							{% else %}
+							<a href="single-product.html"><img src="{% static 'core/assets/img/signo_exclamacion.png' %}" alt=""></a>
+							{% endif %}
+						</div>
+						<h3>{{ aux.nombre }}</h3>
+						<p class="product-price"><span>Precio: </span>${{ aux.precio }} </p>
+						{% if aux.stock <= 0 %}
+							<p class="product-price"><span>Stock: </span> No hay stock </p>
+						{% else %}
+							<p class="product-price"><span>Stock: </span>{{ aux.stock }} </p>
+						{% endif %}
+						{% if aux.stock >= 1 %}
+							<a href="{% url 'agregar_al_carrito' aux.id %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Añadir Carrito</a>
+						{% endif %}
+						<a href="{% url 'delete' aux.id %}" class="cart-btn"><i class="fas fa-trash"></i></a>
+						<a href="{% url 'update' aux.id %}" class="cart-btn"><i class="fas fa-pen"></i></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			
+			<div class="row justify-content-center">
+				<div>
+					{% include 'core/paginator.html' %}
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+{% endblock %}
