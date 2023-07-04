@@ -68,9 +68,35 @@ def about(request):
 
 @login_required
 def cart(request):
-    #for item in request.user.carrito.itemcarrito_set.all:
-     #   total = total + item.producto.precio
-    return render(request, 'core/cart.html')
+    try:
+        usuario = request.user
+        carrito = Carrito.objects.get(usuario=usuario)
+        items = carrito.itemcarrito_set.all()
+        precio_total = 0
+        precio_en_dolares = 0
+        respuesta = requests.get('https://mindicador.cl/api/')
+
+        monedas = respuesta.json()
+        tasa_dolar = monedas['dolar']['valor']
+
+        for item in items:
+            if usuario.suscriptor:
+                precio_total += item.preciototalsuscriptor()
+            else:
+                precio_total += item.preciototal()
+
+        precio_en_dolares = round(precio_total / tasa_dolar, 2)
+
+        data = {
+            'carrito': carrito,
+            'precio_total': precio_total,
+            'precio_en_dolares': precio_en_dolares,
+        }
+
+        return render(request, 'core/cart.html', data)
+    except Carrito.DoesNotExist:
+        messages.warning(request, 'Debes añadir un producto primero a tu carrito.')
+        return render(request, 'core/index.html')
 
 def checkout(request):
     respuesta = requests.get('https://mindicador.cl/api/dolar')
@@ -284,4 +310,4 @@ def desactivarsuscriptor(request):
      usuario = request.user
      usuario.suscriptor = False
      usuario.save()
-     return render(request, "registration/suscribirse.html")
+     return redirect(to="suscribirse")

@@ -45,7 +45,12 @@
 							{% endif %}
 						</div>
 						<h3>{{ aux.nombre }}</h3>
+						{% if user.suscriptor %}
+						<p class="product-price"><span>Precio: </span>${{ aux.descuento }} </p>
+						<strike class="product-price"><span>Precio Anterior: </span>${{ aux.precio }} </strike>
+						{% else %}
 						<p class="product-price"><span>Precio: </span>${{ aux.precio }} </p>
+						{% endif %}
 						{% if aux.stock <= 0 %}
 							<p class="product-price"><span>Stock: </span> No hay stock </p>
 						{% else %}

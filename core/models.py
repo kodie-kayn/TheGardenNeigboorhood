@@ -22,6 +22,9 @@ class Producto(models.Model):
     def str(self):
         return self.nombre
     
+    def descuento(self):
+        return round(self.precio - (self.precio * 0.1))
+    
     def disminuir_stock(self, cantidad):         
         self.stock -= cantidad         
         self.save()
@@ -42,8 +45,14 @@ class ItemCarrito(models.Model):
     def _str_(self):
         return f"{self.producto.nombre} - {self.carrito.usuario.username}"
     
-    def calcularTotal(self):
-        return round(self.cantidad * self.producto.precio)
+    def preciototal(self):
+        return self.cantidad * self.producto.precio
+    
+    def calcularDescuentoCarro(self):
+        return round(self.producto.precio - (self.producto.precio * 0.1))
+    
+    def preciototalsuscriptor(self):
+        return round(self.producto.precio - (self.producto.precio * 0.1)) * self.cantidad
     
 class Trabajador(models.Model):
     nombre_trabajador = models.CharField(max_length=50)
