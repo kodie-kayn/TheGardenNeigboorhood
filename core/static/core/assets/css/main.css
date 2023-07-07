@@ -3217,3 +3217,15 @@ textarea.input100 {
         opacity: 1;
     }
 }
+
+.card {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Agrega sombras en los bordes */
+}
+
+.custom-btn {
+  background-color: green; /* Cambia el color del botón a verde pastel */
+}
+
+.order-number {
+  color: green; /* Cambia el color del número de orden a verde */
+}
