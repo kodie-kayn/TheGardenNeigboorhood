@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+import uuid
 
 # Create your models here.
 
@@ -71,3 +72,64 @@ class suscribirse(models.Model):
     def __str__(self):
         return self.email
     
+class SeguimientoOrden(models.Model):
+    estado = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.estado
+    
+class Orden(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    numero = models.CharField(max_length=36, unique=True, default=uuid.uuid4)
+    fecha = models.DateTimeField(auto_now_add=True)
+    estado = models.ForeignKey(SeguimientoOrden, on_delete=models.CASCADE, default=1)
+    productos = models.ManyToManyField(Producto, through='ItemOrden')
+
+    def __str__(self):
+        return f"Orden #{self.id}"
+    
+    
+    def calcularTotal(self):
+        items = self.itemorden_set.all()
+        total = 0
+
+        for item in items:
+            total += item.precio_total()
+        
+        return total
+        
+    def calcular_cantidad(self):
+        items = self.itemorden_set.all()
+        total = 0
+
+        for item in items:
+            total += item.cantidad
+        
+        return total
+    
+    def calcular_total_suscritor(self):
+        items = self.itemorden_set.all()
+        total = 0
+
+        for item in items:
+            total += item.precio_total_suscritor()
+        
+        return total
+
+class ItemOrden(models.Model):
+    orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.producto.nombre} - {self.orden.carrito.usuario.username}"
+
+    def precio_total(self):
+        return self.cantidad * self.producto.precio
+    
+    def calcularDescuentoCarrito(self):
+        return round(self.producto.precio - (self.producto.precio * 0.05))
+    
+    def precio_total_suscritor(self):
+        return round(self.producto.precio - (self.producto.precio * 0.05)) * self.cantidad    
+ 

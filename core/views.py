@@ -11,6 +11,8 @@ from .serializers import *
 import requests
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+import uuid
+from django.http import JsonResponse
 
 
 #FUNCION QUE VALIDA EL GRUPO
@@ -97,6 +99,19 @@ def cart(request):
     except Carrito.DoesNotExist:
         messages.warning(request, 'Debes añadir un producto primero a tu carrito.')
         return render(request, 'core/index.html')
+
+def boleta(request, numero_orden):
+    usuario = request.user
+    orden = Orden.objects.get(numero = numero_orden)
+    ordenes = Orden.objects.filter(carrito__usuario=usuario)
+
+    data = {
+         'orden': orden,
+         'ordenes': ordenes,
+
+    }
+
+    return render(request, 'core/boleta.html', data)
 
 def checkout(request):
     respuesta = requests.get('https://mindicador.cl/api/dolar')
@@ -311,3 +326,27 @@ def desactivarsuscriptor(request):
      usuario.suscriptor = False
      usuario.save()
      return redirect(to="suscribirse")
+
+#CREAR ORDEN
+def crear_orden(request):
+    if request.method == 'POST':
+        usuario = request.user
+        carrito = usuario.carrito
+
+        # Crear la instancia de la orden
+        orden = Orden.objects.create(carrito=carrito, numero=str(uuid.uuid4()))
+
+        # Obtener los items del carrito
+        items_carrito = carrito.itemcarrito_set.all()
+
+        # Crear instancias de ItemOrden y asignarlos a la orden
+        for item in items_carrito:
+            ItemOrden.objects.create(orden=orden, producto=item.producto, cantidad=item.cantidad)
+
+        # Limpiar el carrito
+        carrito.productos.clear()
+
+        # Devolver una respuesta JSON indicando el éxito de la creación de la orden
+        return JsonResponse({'success': True, 'numero_orden': orden.numero})
+    else:
+        return JsonResponse({'success': False})
