@@ -28,3 +28,7 @@ admin.site.register(Carrito)
 admin.site.register(ItemCarrito)
 admin.site.register(suscribirse)
 admin.site.register(usuariopersonalizado)
+admin.site.register(SeguimientoOrden)
+admin.site.register(Orden)
+admin.site.register(ItemOrden)
+

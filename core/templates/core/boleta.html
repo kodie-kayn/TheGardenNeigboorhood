@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 m-5">
+            <form method="POST">
+                <br>
+                <h1 class="d-flex justify-content-around align-items-center align-self-center font-weight-bold text-dark text-center h1"> ¡SU PAGO FUE COMPLETADO! </h1>
+                <div class="card mx-auto mt-5" style="width: 40rem;">
+                    <div class="card-body text-center">
+                      <h5 class="card-title h2 bonito-minimalista">BOLETA</h5>
+                      <p class="card-text text-uppercase h5">Nombre Cliente: {{ orden.carrito }}</p>
+                      <p class="card-text text-uppercase h5">N° De orden: {{ orden.numero }}</p>
+                      <br>
+                      {% for producto in orden.productos.all %}
+                          <p class="card-text text-uppercase h5">PRODUCTO:</p>
+                          <p class="card-text text-uppercase h5">{{ producto.nombre }}</p>
+                          
+                      {% endfor %}
+                      <br>
+                      <p class="card-text text-uppercase h5">Cantidad de productos: {{ orden.calcular_cantidad }}</p>
+                      <br>
+                      {% if user.suscriptor %}
+                        <p class="card-text text-uppercase h5">PRECIO TOTAL: $ {{ orden.calcular_total_suscritor }}</p>
+                      {% else %}
+                        <p class="card-text text-uppercase h5">PRECIO TOTAL: $ {{ orden.calcular_total }}</p>
+                      {% endif %} 
+                      <img src="{% static 'core/images/image.png' %}" alt="">
+                      <br><br>
+                      
+                    </div>
+                </div>
+                <a href="{% url 'index' %}" class="btn btn-dark btn-block mt-5 w-25 mx-auto" >VOLVER AL INICIO</a>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

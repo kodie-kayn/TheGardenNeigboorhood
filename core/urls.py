@@ -50,5 +50,9 @@ urlpatterns = [
     #Suscripcion
     path('activarsuscriptor/', activarsuscriptor, name='activarsuscriptor'),
     path('desactivarsuscriptor/', desactivarsuscriptor, name='desactivarsuscriptor'),
+
+    #Orden
+    path('crear_orden/', crear_orden, name='crear_orden'),
+    path('boleta/<numero_orden>', boleta, name='boleta'),
 ]
 
