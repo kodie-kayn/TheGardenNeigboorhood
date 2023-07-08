@@ -113,21 +113,22 @@
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">
 						<h3>Nuestro <span class="orange-text">Equipo</span></h3>
-						<p>Destacamos su increible liderazgo en el area del jardin y huerto del barrio.</p>
+						<p>Destacamos su increible liderazgo en el área del jardín y huerto del barrio.</p>
 					</div>
 				</div>
 			</div>
-			
+			{% if user.is_authenticated and user.is_superuser %}
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center">
 					<a href="{% url 'add_trabajador' %}" class="cart-btn"><i class="fas fa-plus"></i> Añadir Empleados</a>
 				</div>
 			</div>
-
+			{% endif %}
+	
 			<br>
-			<div class="row">				
-				<div class="col-lg-4 col-md-6">
-					{% for trab in listado %}
+			<div class="row product-lists">
+				{% for trab in listado %}
+				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-team-item">
 						<button></button>
 						{% if trab.imagen_trabajador %}
@@ -135,19 +136,21 @@
 						{% else %}
 						<a href="single-product.html"><img src="{% static 'core/assets/img/signo_exclamacion.png' %}" alt=""></a>
 						{% endif %}
+	
 						<h4> {{ trab.nombre_trabajador }} <span>{{ trab.descripcion_trabajador }}</span></h4>
+						{% if user.is_authenticated and user.is_superuser %}
 						<div class="text-center">
 							<a href="{% url 'delete_trabajador' trab.id %}" class="cart-btn"><i class="fas fa-trash"></i></a>
 							<a href="{% url 'update_trabajador' trab.id %}" class="cart-btn"><i class="fas fa-pen"></i></a>						
 						</div>
+						{% endif %}
 					</div>
-					{% endfor %}
 				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
-
-
+	
 	<!-- end team section -->
 
 	<!-- end shop banner -->

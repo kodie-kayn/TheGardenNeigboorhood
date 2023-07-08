@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import uuid
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 #FUNCION QUE VALIDA EL GRUPO
@@ -76,6 +77,7 @@ def cart(request):
         items = carrito.itemcarrito_set.all()
         precio_total = 0
         precio_en_dolares = 0
+       
         respuesta = requests.get('https://mindicador.cl/api/')
 
         monedas = respuesta.json()
@@ -84,15 +86,18 @@ def cart(request):
         for item in items:
             if usuario.suscriptor:
                 precio_total += item.preciototalsuscriptor()
+                precio_en_dolares = round(precio_total / tasa_dolar, 2)
             else:
                 precio_total += item.preciototal()
+                precio_en_dolares = round(precio_total / tasa_dolar, 2)
 
-        precio_en_dolares = round(precio_total / tasa_dolar, 2)
+        precio_en_dolares = '{:.2f}'.format(precio_en_dolares)
 
         data = {
             'carrito': carrito,
             'precio_total': precio_total,
             'precio_en_dolares': precio_en_dolares,
+            
         }
 
         return render(request, 'core/cart.html', data)
@@ -350,3 +355,28 @@ def crear_orden(request):
         return JsonResponse({'success': True, 'numero_orden': orden.numero})
     else:
         return JsonResponse({'success': False})
+    
+@login_required
+def seguimiento(request):
+    form = SeguimientoForm()
+    data = {
+        'form': form
+    }
+    if request.method == 'POST':
+        form = SeguimientoForm(request.POST)
+        if form.is_valid():
+            numero_orden = form.cleaned_data['numero_orden']
+            try:
+                orden = Orden.objects.get(numero=numero_orden)
+                data['orden'] = orden
+                print(orden.numero)
+                return render(request, 'core/estadocompra.html', data)
+            except ObjectDoesNotExist:
+                messages.error(request, "¡EL NÚMERO DE ORDEN NO EXISTE!")
+
+    return render(request, 'core/seguimiento.html', data)
+
+@login_required
+def estadocompra(request, numero_orden):
+    orden = Orden.objects.get(numero=numero_orden)
+    return render(request, 'estadocompra.html', {'numero_orden': orden})
