@@ -54,5 +54,9 @@ urlpatterns = [
     #Orden
     path('crear_orden/', crear_orden, name='crear_orden'),
     path('boleta/<numero_orden>', boleta, name='boleta'),
+
+    #Seguimiento
+    path('seguimiento/', seguimiento, name="seguimiento"),
+    path('estadocompra/', estadocompra, name='estadocompra'),
 ]
 

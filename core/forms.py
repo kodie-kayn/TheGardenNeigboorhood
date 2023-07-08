@@ -42,3 +42,8 @@ class SubscripcionForm(forms.ModelForm):
     class Meta:
         model = suscribirse
         fields = ['name','apellido','email']
+
+class SeguimientoForm(forms.Form):
+    numero_orden = forms.CharField(max_length=100, widget=forms.TextInput(attrs={"placeholder":"INGRESE NÚMERO DE SEGUIMIENTO: "}))
+    numero_orden.widget.attrs['class'] = 'text-center'
+    numero_orden.label = ''
