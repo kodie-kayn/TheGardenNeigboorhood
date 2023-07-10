@@ -95,7 +95,11 @@
 								</li>
 								{% endif %}
 								<li><a href="{% url 'seguimiento' %}">Seguimiento</a></li>
-								
+								{% if user.is_superuser %}
+								<li><a href="{% url 'panel_admin' %}">Panel de administración</a></li>
+								{% else %}
+								<li><a href=""></a></li>
+								{% endif %}
 								<li>
 									
 									<div class="header-icons">

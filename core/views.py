@@ -380,3 +380,41 @@ def seguimiento(request):
 def estadocompra(request, numero_orden):
     orden = Orden.objects.get(numero=numero_orden)
     return render(request, 'estadocompra.html', {'numero_orden': orden})
+
+#panel admin
+def panel_admin(request):
+    ordenes = Orden.objects.all()
+    form = EstadoOrden()
+
+    if request.method == 'POST':
+        form = EstadoOrden(request.POST)
+        if form.is_valid():
+            orden_numero = form.cleaned_data['orden_numero']
+            estado = form.cleaned_data['estado']
+            orden = Orden.objects.get(numero=orden_numero)
+            orden.estado = estado
+            orden.save()
+
+    data = {
+        'ordenes': ordenes,
+        'form': form,
+    }
+
+    return render(request, 'core/panel_admin.html', data)
+
+
+def cambiar_estado(request, numero_orden):
+    orden = Orden.objects.get(numero=numero_orden)
+    form = EstadoOrden(request.POST or None, initial={'estado': orden.estado})
+
+    if request.method == 'POST' and form.is_valid():
+        seguimiento = SeguimientoOrden.objects.create(estado=form.cleaned_data['estado'])
+        orden.estado = seguimiento
+        orden.save()
+
+    data = {
+        'ordenes': Orden.objects.all(),
+        'form': form,
+    }
+
+    return render(request, 'core/panel_admin.html', data)
