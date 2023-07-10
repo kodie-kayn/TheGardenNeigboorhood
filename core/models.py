@@ -133,3 +133,4 @@ class ItemOrden(models.Model):
     def precio_total_suscritor(self):
         return round(self.producto.precio - (self.producto.precio * 0.05)) * self.cantidad    
  
+
