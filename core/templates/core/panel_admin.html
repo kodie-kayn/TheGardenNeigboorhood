@@ -5,45 +5,50 @@
 {% block contenido %}
 
 <br><br><br><br><br><br>
-<div class="container">
-    <div class="row">
-        <div class="col-12 m-5">
-            <h1 class="d-flex justify-content-center align-items-center font-weight-bold text-dark h1 bonito-minimalista"> PANEL DE ADMINISTRACIÓN </h1>
-			<br>
-            <div class="container">           
-              <table class="table table-dark table-hover">
-                <thead>
-                    <tr>
-                        <th>Estado</th>
-                        <th>Número de Orden</th>
-                        <th>Nombre</th>
-                        <th>E-mail del cliente</th>
-                        <th>Actualizar Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for orden in ordenes %}
-                    <tr>
-                        <td>{{ orden.estado }}</td>
-                        <td>{{ orden.numero }}</td>
-                        <td class="text-uppercase">{{ orden.carrito.usuario }}</td>
-                        <td class="text-uppercase">{{ orden.carrito.usuario.email }}</td>
-                        <td>
-                            <form method="post" action="{% url 'cambiar_estado' orden.numero %}">
-                                {% csrf_token %}
-                                {{ form.estado }}
-                                <button type="submit" class="btn btn-success btn-sm">Actualizar</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-              </div>
-              
-        </div>
-    </div>
-</div>   
+
+
+<body>
+
+<div class="container mt-3">
+  <h3>Panel de Administración</h3>
+  <br><br>
+
+  <p></p>
+
+  <table class="table">
+    <thead class="table-success">
+      <tr>
+        <th>Número de Orden</th>
+        <th>Estado</th>
+        <th>Usuario</th>
+        <th></th>
+        
+    </tr>
+    </thead>
+    <tbody>
+        {% for orden in ordenes %}
+        <tr>
+            
+            <td>{{ orden.numero }}</td>
+            <td>{{ orden.estado }}</td>
+            <td class="text-uppercase">{{ orden.carrito.usuario }}</td>
+            
+            <td>
+                <form method="post" action="{% url 'cambiar_estado' orden.numero %}">
+                    {% csrf_token %}
+                    {{ form.estado }}
+                    <button type="submit" class="btn btn-dark"">Actualizar</button>
+                </form>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
 
 
 {% endblock %}

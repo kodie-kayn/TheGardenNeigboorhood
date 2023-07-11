@@ -171,8 +171,6 @@ def shop (request):
         'paginator': paginator
     }
 
-   
-    
     return render(request, 'core/shop.html', data)
 
 def singlenews (request):
