@@ -416,3 +416,12 @@ def cambiar_estado(request, numero_orden):
     }
 
     return render(request, 'core/panel_admin.html', data)
+
+def miscompras(request):
+    usuario = request.user
+    ordenes = Orden.objects.filter(carrito__usuario=usuario)
+
+    data = {
+        'ordenes': ordenes,
+    }
+    return render(request, 'core/miscompras.html', data)

@@ -37,7 +37,7 @@
                 <form method="post" action="{% url 'cambiar_estado' orden.numero %}">
                     {% csrf_token %}
                     {{ form.estado }}
-                    <button type="submit" class="btn btn-dark"">Actualizar</button>
+                    <button type="submit" class="btn btn-dark">Actualizar</button>
                 </form>
             </td>
             

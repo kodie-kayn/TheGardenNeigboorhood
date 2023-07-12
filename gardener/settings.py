@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'gardener.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'tgn_oficial',
+        'NAME' : 'tgn_oficial1',
         'HOST' : 'localhost',
         'PORT' : '3306',
         'USER' : 'root',
