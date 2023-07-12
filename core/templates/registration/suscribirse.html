@@ -24,7 +24,7 @@
 				{{ form|crispy }}
 				{% if user.suscriptor %}
 				<div class="text-center">
-					<a href="{% url 'desactivarsuscriptor' %}" class="btn btn-primary text-center" id="cancelar_suscripcion">Cancelar suscripción</a>
+					<a href="{% url 'desactivarsuscriptor' %}" class="btn btn-success text-center" id="cancelar_suscripcion">Cancelar suscripción</a>
 				</div>					
 				{% else %}
 				<p>Monto Que desea donar*</p>

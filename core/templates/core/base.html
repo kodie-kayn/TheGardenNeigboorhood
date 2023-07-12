@@ -62,20 +62,25 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#"></a>
+								<li><a href="{% url 'index' %}">Inicio</a></li>
 
-									<li><a href="{% url 'index' %}">Inicio</a></li>
+								<li><a href="{% url 'about' %}">Sobre Nosotros</a></li>	
 
-								</li>
-								<li><a href="{% url 'about' %}">Sobre Nosotros</a></li>								
-									<ul class="sub-menu">
-										<li><a href="{% url 'news' %}">News</a></li>
-										<li><a href="{% url 'singlenews' %}">Single News</a></li>
-									</ul>
-								</li>
-								<li><a href="{% url 'suscribirse' %}">Suscribete</a></li>								
 								{% if user.is_authenticated %}
 								<li><a href="{% url 'shop' %}">Tienda</a>
+								{% endif %}
+
+								<li><a href="{% url 'suscribirse' %}">Suscribete</a></li>
+								
+								
+								{% if user.is_superuser %}
+								<li><a href="{% url 'panel_admin' %}">Panel de administración</a></li>
+								{% else %}
+
+								<li><a href=""></a></li>
+								{% endif %}
+								{% if user.is_authenticated %}
+								
 								<li><a >Bienvenido: {{user.username}} </li>
 								<li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
 								
@@ -84,27 +89,15 @@
 								<li><a href="{% url 'register' %}">Registrarse</a></li>
 								<li><a href="{% url 'login' %}">Ingresar</a></li>
 								{% endif %}
-
-								{% if user.is_authenticated %}
-									<ul class="sub-menu">
-										<li><a href="{% url 'shop' %}">Shop</a></li>
-										<li><a href="{% url 'checkout' %}">Check Out</a></li>
-										<li><a href="single-product.html">Single Product</a></li>
-										<li><a href="{% url 'cart' %}">Cart</a></li>
-									</ul>
-								</li>
-								{% endif %}
-								<li><a href="{% url 'seguimiento' %}">Seguimiento</a></li>
-								{% if user.is_superuser %}
-								<li><a href="{% url 'panel_admin' %}">Panel de administración</a></li>
-								{% else %}
-								<li><a href=""></a></li>
-								{% endif %}
 								<li>
 									
 									<div class="header-icons">
 										{% if user.is_authenticated %}
-										<a class="shopping-cart" href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
+										<a class="shopping-cart" href="{% url 'cart' %}"><i class="fas fa-cart-arrow-down"></i></a>
+										
+										<a class="shopping-cart" href="{% url 'miscompras' %}"><i class="fa fa-shopping-basket"></i></a>
+
+										<a class="shopping-cart" href="{% url 'seguimiento' %}"><i class="fa fa-truck"></i></a>
 										{% endif %}
 									</div>
 									
@@ -129,16 +122,33 @@
 {% endblock %}
 
 <!-- footer -->
-<div class="footer-area" style="margin-top:100px">
+<div class="footer-area" style="margin-top: 100px">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+
+			<div class="col-lg-4">
                 <div class="footer-box about-widget">
                     <h2 class="widget-title">Sobre Nosotros</h2>
-                    <p>Somos vecinos unidos por una misma causa, hacer fondos a beneficio, además vendemos flores/plantas con los cuales puedes desde hermosear y complementar tu jardín hasta rediseñar tu hogar</p>
+					<ul>
+						<li>Somos vecinos unidos por una misma causa, hacer fondos a beneficio. Además, vendemos flores/plantas con los cuales puedes desde embellecer y complementar tu jardín hasta rediseñar tu hogar </li>
+					</ul>
+                    
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+
+            <div class="col-lg-4">
+                <div class="footer-box subscribe">
+                    <h2 class="widget-title">Subscribete</h2>
+					<ul>
+						<li> Subscribete para apoyar a la fundación y para obtener un descuento fenomenal en tus futuras compras!  </li>
+						
+					</ul>
+                    
+                </div>
+            </div>
+
+			
+            <div class="col-lg-4">
                 <div class="footer-box get-in-touch">
                     <h2 class="widget-title">Contáctanos</h2>
                     <ul>
@@ -148,17 +158,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-box subscribe">
-                    <h2 class="widget-title">Subscribete</h2>
-                    <p>Subscribete para apoyar a la fundación y para que tengas un descuento fenomenal en tus futuras compras!</p>   
-                    </form>
-					</div>
-                </div>
-            </div>
         </div>
+
     </div>
 </div>
+
 <!-- end footer -->
 
 <!-- copyright -->

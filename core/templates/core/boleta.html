@@ -74,7 +74,7 @@
             {% if user.suscriptor %}
                 <p class="card-text text-uppercase h5"><span class="order-number"> $ {{ orden.calcular_total_suscritor }}</span></p>
             {% else %}
-                <p class="card-text text-uppercase h5"><span class="order-number">  $ {{ orden.calcular_total }}</span></p>
+                <p class="card-text text-uppercase h5"><span class="order-number">  $ {{ orden.calcularTotal }}</span></p>
             {% endif %}
             </td>
 

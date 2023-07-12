@@ -61,5 +61,6 @@ urlpatterns = [
 
     path('panel_admin/', panel_admin, name="panel_admin"),
     path('cambiar_estado/<str:numero_orden>/', cambiar_estado, name="cambiar_estado"),
+    path('miscompras/', miscompras, name="miscompras"),
 ]
 

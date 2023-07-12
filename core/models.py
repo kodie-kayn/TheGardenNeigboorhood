@@ -8,7 +8,7 @@ import uuid
 class TipoProducto(models.Model):
     descripcion = models.CharField(max_length=50)
 
-    def str(self):
+    def __str__(self):
         return self.descripcion
 
 class Producto(models.Model):
@@ -20,7 +20,7 @@ class Producto(models.Model):
     vencimiento = models.DateField()
     imagen = models.ImageField(null=True,blank=True)
 
-    def str(self):
+    def __str__(self):
         return self.nombre
     
     def descuento(self):
@@ -34,8 +34,8 @@ class Carrito(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     productos = models.ManyToManyField(Producto, through='ItemCarrito')
 
-    def _str_(self):
-        return f"Carrito de {self.usuario.username}"
+    def __str__(self):
+        return f"{self.usuario.username}"
     
     
 class ItemCarrito(models.Model):
@@ -43,7 +43,7 @@ class ItemCarrito(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.producto.nombre} - {self.carrito.usuario.username}"
     
     def preciototal(self):
